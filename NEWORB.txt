@@ -35,7 +35,7 @@
         Px(37, 3) = 4446370.8284487# + Px(3, 3): Py(37, 3) = 4446370.8284487# + Py(3, 3): Vx(37) = Vx(3): Vy(37) = Vy(3)
         CLOSE #1
 
-     
+
         'System variables
 99      eng = 0:    vflag = 0:  Aflag = 0:   Sflag = 0
         mag = 25:   Sangle = 0: cen = 0:     targ = 0:   ref = 3
@@ -58,7 +58,7 @@
         P(0, 2) = 0
         vernP! = -100
         OLDts = .25
-       
+
         'Forced situation file
 80      OPEN "I", #1, "orbitstr.txt"
         INPUT #1, suA$
@@ -79,20 +79,20 @@
         'Initialize frame rate timer
 100     tttt = TIMER
         'GOTO 9111
-       
+
         'Zero acceleration variables
         FOR i = 0 TO 35: P(i, 1) = 0: P(i, 2) = 0: NEXT i
         P(38, 1) = 0
         P(38, 2) = 0
         P(39, 1) = 0
         P(39, 2) = 0
-       
+
         'Erase target vector
         IF DISPflag = 0 THEN LINE (30, 120)-(30 + (20 * SIN(Atarg)), 120 + (20 * COS(Atarg))), 0
         IF SQR(((Px(28, 3) - cenX) * mag / AU) ^ 2 + ((Py(28, 3) - cenY) * mag * 1 / AU) ^ 2) > 400 THEN 131
         IF vflag = 1 THEN LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (30 * SIN(Atarg)) + (Px(28, 3) - cenX) * mag / AU, 220 + (30 * COS(Atarg)) + (Py(28, 3) - cenY) * mag * 1 / AU), 0
         IF vflag = 1 THEN LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (10 * SIN(Sangle)) + (Px(28, 3) - cenX) * mag / AU, 220 + (10 * COS(Sangle)) + (Py(28, 3) - cenY) * mag * 1 / AU), 0
-        
+
 131     CONflag = 0
         atm = 40
         LtrA = 0
@@ -125,13 +125,13 @@
         'Record old center position
 101     cenX = Px(cen, 3) + cenXoff
         cenY = Py(cen, 3) + cenYoff
-       
+
         'Erase velocity, approach velocity, and orientation vectors
         IF DISPflag = 0 THEN LINE (30, 120)-(30 + (5 * SIN(Sangle)), 120 + (5 * COS(Sangle))), 0
         IF DISPflag = 0 THEN LINE (30, 120)-(30 + (10 * SIN(Vvangle)), 120 + (10 * COS(Vvangle))), 0
         IF SQR(((Px(28, 3) - cenX) * mag / AU) ^ 2 + ((Py(28, 3) - cenY) * mag * 1 / AU) ^ 2) > 400 THEN 132
         IF vflag = 1 THEN LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (20 * SIN(Vvangle)) + (Px(28, 3) - cenX) * mag / AU, 220 + (20 * COS(Vvangle)) + (Py(28, 3) - cenY) * mag * 1 / AU), 0
-       
+
         'Update object velocities and erase old positions
 132     FOR i = 37 + ufo1 + ufo2 TO 0 STEP -1
          IF i = 28 THEN GOSUB 301
@@ -193,12 +193,12 @@
          LINE (300 + px6, 220 + py6)-(300 + px3, 220 + py3), clr
          LINE (300 + px3, 220 + py3)-(300 + px2, 220 + py2), clr
          RETURN
-      
+
          'Paint AYSE
 158      angleS = AYSEangle + 1.785
          IF angleS > pi2 THEN angleS = angleS - pi2
          IF angleS < 0 THEN angleS = angleS + pi2
-    
+
          angleE = AYSEangle + 1.36
          IF angleE > pi2 THEN angleE = angleE - pi2
          IF angleE < 0 THEN angleE = angleE + pi2
@@ -206,7 +206,7 @@
          angleS1 = AYSEangle - pi
          IF angleS1 > pi2 THEN angleS1 = angleS1 - pi2
          IF angleS1 < 0 THEN angleS1 = angleS1 + pi2
-      
+
          angleE1 = AYSEangle
          IF angleE1 > pi2 THEN angleE1 = angleE1 - pi2
          IF angleE1 < 0 THEN angleE1 = angleE1 + pi2
@@ -219,7 +219,7 @@
          Ax4 = Px(32, 3) + (95 * SIN(AYSEangle - (pi / 2)))
          Ay3 = Py(32, 3) + (95 * COS(AYSEangle + (pi / 2)))
          Ay4 = Py(32, 3) + (95 * COS(AYSEangle - (pi / 2)))
-       
+
          Ax5 = Ax1 - (1000 * SIN(AYSEangle))
          Ay5 = Ay1 - (1000 * COS(AYSEangle))
          IF Ax1 = Ax5 THEN Ad1 = ABS(Px(28, 3) - Ax1): GOTO 157
@@ -243,7 +243,7 @@
          Ax8 = (Ab22 - Ab2) / (Am2 - Am22)
          Ay8 = (Am2 * Ax8) + Ab2
          Ad2 = SQR((Px(28, 3) - Ax8) ^ 2 + (Py(28, 3) - Ay8) ^ 2)
-        
+
 159      Ad3 = SQR((Px(28, 3) - Ax1) ^ 2 + (Py(28, 3) - Ay1) ^ 2)
          clr1 = 4
          clr2 = 4
@@ -309,8 +309,8 @@
         IF AYSE = 150 THEN Vx(32) = Vx(28): Vy(32) = Vy(28): Px(32, 3) = Px(28, 3): Py(32, 3) = Py(28, 3): AYSEangle = Sangle
         IF CONflag2 = 1 AND CONflag4 = 0 THEN CONflag4 = 1: explFLAG2 = 1
         IF CONflag2 = 1 AND CONflag3 < 38 THEN Vx(32) = Vx(CONflag3): Vy(32) = Vy(CONflag3)
-       
-       
+
+
         'Update object positions
         FOR i = 0 TO 37 + ufo1 + ufo2
          Px(i, 3) = Px(i, 3) + (Vx(i) * ts)
@@ -321,12 +321,12 @@
         IF ts > 10 THEN GOSUB 3100
         IF MODULEflag > 0 THEN Px(36, 3) = P(36, 1) + Px(MODULEflag, 3): Py(36, 3) = P(36, 2) + Py(MODULEflag, 3): Vx(36) = Vx(MODULEflag): Vy(36) = Vy(MODULEflag)
         Px(37, 3) = 4446370.8284487# + Px(3, 3): Py(37, 3) = 4446370.8284487# + Py(3, 3): Vx(37) = Vx(3): Vy(37) = Vy(3)
-       
+
         'Record new center position
         cenX = Px(cen, 3) + cenXoff
         cenY = Py(cen, 3) + cenYoff
-     
-       
+
+
         'Repaint objects to the screen
 111     FOR i = 37 + ufo1 + ufo2 TO 0 STEP -1
          IF i = 36 AND MODULEflag = 0 THEN 109
@@ -350,7 +350,7 @@
          LINE (300 - (dist * csz) - (300 * snz), 220 + (dist * snz) - (300 * csz))-(300 - (dist * csz) + (300 * snz), 220 + (dist * snz) + (300 * csz)), P(i, 0)
 
 109     NEXT i
-       
+
 
         'Calculate parameters for landing target
         IF targ < 40 THEN 179
@@ -369,7 +369,7 @@
         Acctarg = LtrA + ((((Vx(28) - Vx(targ)) ^ 2 + (Vy(28) - Vy(targ)) ^ 2) / (2 * (Dtarg))))
 
 179     oldSa = Sangle
-     
+
         'Calculate angle from target to reference object
         IF targ = ref THEN Atargref = 0: GOTO 114
         difX = Px(targ, 3) - Px(ref, 3)
@@ -383,14 +383,14 @@
 
         'Re-paint target vector
 114     IF DISPflag = 0 THEN LINE (30, 120)-(30 + (20 * SIN(Atarg)), 120 + (20 * COS(Atarg))), 8
-       
-       
+
+
         'Repaint velocity and orientation vectors
         difX = Vx(targ) - Vx(28)
         difY = Vy(targ) - Vy(28)
         GOSUB 5000
         Vvangle = angle
-               
+
         IF DISPflag = 0 THEN LINE (30, 120)-(30 + (10 * SIN(Vvangle)), 120 + (10 * COS(Vvangle))), 12
         IF DISPflag = 0 THEN LINE (30, 120)-(30 + (5 * SIN(Sangle)), 120 + (5 * COS(Sangle))), 10
         IF DISPflag = 0 THEN PSET (30, 120), 1
@@ -399,8 +399,8 @@
         IF vflag = 1 THEN LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (20 * SIN(Vvangle)) + (Px(28, 3) - cenX) * mag / AU, 220 + (20 * COS(Vvangle)) + (Py(28, 3) - cenY) * mag * 1 / AU), 12
         IF vflag = 1 THEN LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (10 * SIN(Sangle)) + (Px(28, 3) - cenX) * mag / AU, 220 + (10 * COS(Sangle)) + (Py(28, 3) - cenY) * mag * 1 / AU), 10
 133     VangleDIFF = Atarg - Vvangle
-       
-       
+
+
         'Cause explosion
         IF Ztel(5) = 1 THEN Ztel(5) = 0: explFLAG1 = 1: explosion = 0
         IF Ztel(6) = 1 THEN Ztel(6) = 0: explFLAG2 = 1: explosion1 = 0
@@ -418,14 +418,14 @@
         IF INT(year / 100) * 100 = year THEN dayNUM = 365
         IF INT(year / 400) * 400 = year THEN dayNUM = 366
         IF day = dayNUM + 1 THEN year = year + 1: day = 1
-       
+
         IF dte = 0 THEN 121
         IF dte > 1 THEN GOSUB 8100: GOTO 121
         LOCATE 25, 58: PRINT "   ";
         PRINT USING "####"; year;
         LOCATE 25, 66: PRINT USING "###"; day; hr; min;
         IF ts < 60 THEN LOCATE 25, 75: PRINT USING "###"; sec;
-       
+
         'Print Simulation data
 121     IF targ = 40 THEN 123
         IF COS(VangleDIFF) <> 0 AND Dtarg - P(targ, 5) <> 0 THEN Acctarg = Acctarg + ((((Vx(28) - Vx(targ)) ^ 2 + (Vy(28) - Vy(targ)) ^ 2) / (2 * (Dtarg - P(targ, 5)))) * COS(VangleDIFF))
@@ -462,7 +462,7 @@
 124     GOSUB 3005
         GOSUB 3008
         GOSUB 3006
-                               
+
 
 113     'Timed back-up
         IF bkt - TIMER > 120 THEN bkt = TIMER
@@ -492,12 +492,12 @@
         IF z$ = CHR$(0) + "D" THEN OFFSET = 1 - ABS(OFFSET): GOSUB 400
         IF z$ = CHR$(0) + CHR$(134) THEN CONSTacc = 1 - CONSTacc: Accel = Aacc: MATCHacc = 0
         IF z$ = CHR$(0) + CHR$(133) THEN MATCHacc = 1 - MATCHacc: CONSTacc = MATCHacc
-       
+
         IF z$ = "+" AND mag < 130000000000# THEN mag = mag / .75: CLS : GOSUB 400
         IF z$ = "-" AND mag > 6.8E-11 THEN mag = mag * .75: CLS : GOSUB 400
         IF z$ = CHR$(0) + "I" AND vernP! > 0 THEN HABrotate% = HABrotate% - 1: vernP! = vernP! - 1
         IF z$ = CHR$(0) + "G" AND vernP! > 0 THEN HABrotate% = HABrotate% + 1: vernP! = vernP! - 1
-                                                                           
+
 
         IF z$ = "[" THEN GOSUB 460
         IF z$ = "]" THEN GOSUB 465
@@ -508,8 +508,8 @@
         IF z = 28 THEN 110
         IF Aflag = 1 THEN targ = z: GOSUB 400
         IF Aflag = 2 THEN ref = z: GOSUB 400
-        
-      
+
+
 110     IF z$ = CHR$(0) + "S" THEN eng = eng + .1: GOSUB 400
         IF z$ = CHR$(0) + "R" THEN eng = eng - .1: GOSUB 400
         IF z$ = CHR$(0) + "Q" THEN eng = eng + 1: GOSUB 400
@@ -521,7 +521,7 @@
         IF z$ = CHR$(0) + "K" THEN vern = .1: vernA = 90
         IF z$ = CHR$(0) + "M" THEN vern = .1: vernA = -90
         IF z$ = CHR$(0) + "P" THEN vern = .1: vernA = 180
-       
+
         IF z$ <> "v" THEN 107
         vflag = 1 - vflag
         LINE (300 + (Px(28, 3) - cenX) * mag / AU, 220 + (Py(28, 3) - cenY) * mag * 1 / AU)-(300 + (20 * SIN(Vvangle)) + (Px(28, 3) - cenX) * mag / AU, 220 + (20 * COS(Vvangle)) + (Py(28, 3) - cenY) * mag * 1 / AU), 0
@@ -577,7 +577,7 @@
         IF PROJflag = 0 THEN DIFFangle = (Aa - Sangle) * RAD ELSE DIFFangle = (Atarg - Vvtangle) * RAD
         IF DIFFangle > 180 THEN DIFFangle = -360 + DIFFangle
         IF DIFFangle < -180 THEN DIFFangle = 360 + DIFFangle
-       
+
         difX = Px(28, 3) - Px(Ztel(14), 3)
         difY = Py(28, 3) - Py(Ztel(14), 3)
         GOSUB 5000
@@ -603,7 +603,7 @@
         IF diffSangle < (-1 * pi) THEN diffSangle = pi2 + diffSangle
         IF ABS(diffSangle) < .24 * ts THEN Sangle = dSangle: GOTO 302
         Sangle = Sangle + (.2 * ts * SGN(diffSangle))
-       
+
 302     IF Sangle < 0 THEN Sangle = Sangle + pi2
         IF Sangle > pi2 THEN Sangle = Sangle - pi2
         IF oldAcctarg < 0 THEN MATCHacc = 0
@@ -615,7 +615,7 @@
         COLOR 10
         LOCATE 25, 19: IF HABrotate% < 0 THEN PRINT ">";  ELSE PRINT " ";
         LOCATE 25, 14: IF HABrotate% > 0 THEN PRINT "<";  ELSE PRINT " ";
-       
+
 307     COLOR 15
         IF Ztel(2) = 0 THEN MATCHacc = 0: CONSTacc = 0
         IF MATCHacc = 1 THEN Accel = oldAcctarg
@@ -633,13 +633,13 @@
         P(i, 2) = P(i, 2) + (Aacc * COS(Sangle))
         P(i, 1) = P(i, 1) + Av * SIN(Sangle + (vernA / RAD))
         P(i, 2) = P(i, 2) + Av * COS(Sangle + (vernA / RAD))
-       
+
 
         THRUSTx = (Aacc * SIN(Sangle))
         THRUSTy = (Aacc * COS(Sangle))
         THRUSTx = THRUSTx + (Av * SIN(Sangle + (vernA / RAD)))
         THRUSTy = THRUSTy + (Av * COS(Sangle + (vernA / RAD)))
-       
+
         Are = 0
         IF atm = 40 AND Ztel(16) <> 3.141593 THEN Are = 0: GOTO 319
         difX = Vx(atm) - Vx(28) + VwindX
@@ -662,21 +662,21 @@
         Agrav = Agrav + ((THRUSTy - (Are * COS(VvRangle))) ^ 2)
         Agrav = SQR(Agrav)
         IF CONflag = 1 THEN Agrav = CONacc
-       
+
         IF THRUSTy = 0 THEN IF THRUSTy < 0 THEN THRUSTangle = .5 * 3.1415926535# ELSE THRUSTangle = 1.5 * 3.1415926535# ELSE THRUSTangle = ATN(THRUSTx / THRUSTy)
         IF THRUSTy > 0 THEN THRUSTangle = THRUSTangle + 3.1415926535#
         IF THRUSTx > 0 AND THRUSTy < 0 THEN THRUSTangle = THRUSTangle + 6.283185307#
-      
+
         LOCATE 5, 8: COLOR 14
         IF SRB > 10 THEN PRINT "SRB";  ELSE PRINT "   ";
         IF AYSE = 150 THEN COLOR 10 ELSE COLOR 0
         LOCATE 5, 12: PRINT "AYSE";
         COLOR 7
-       
+
         RETURN
 
 
-       
+
         'SUBROUTINE print control variable names to screen
 400     IF mag < .1 THEN GOSUB 8000
         IF ts < .125 THEN ts = .125
@@ -783,8 +783,8 @@
         IF ref - 1 = 36 AND MODULEflag = 0 THEN ref = 36
         IF ref - 1 < 0 THEN ref = 35
         ref = ref - 1
-       
-        
+
+
 464     GOSUB 400
         RETURN
 
@@ -810,7 +810,7 @@
         IF ref + 1 = 35 THEN ref = -1
         IF ref + 1 > 37 THEN ref = 36
         ref = ref + 1
-       
+
 469     GOSUB 400
         RETURN
 
@@ -889,7 +889,7 @@
         GOSUB 400
         Eflag = Eflag + 1
         GOTO 801
-       
+
 
         'SUBROUTINE Timed back-up
 800     OPEN "O", #1, "OSbackup"
@@ -1040,7 +1040,7 @@
         IF ecc < 1 AND lim2 = 181 THEN lim1 = 181: lim2 = 359.9: stp = .1: GOTO 3003
         GOSUB 3020
         RETURN
-       
+
 3005    IF ORref = 1 THEN ORrefD = Dtarg: ORrefOBJ = targ: GOTO 3009
         difX = Vx(ref) - Vx(28)
         difY = Vy(ref) - Vy(28)
@@ -1309,7 +1309,7 @@
          IF ABS(220 + (Pz(i, 2) - cenY) * mmag / AU) > 1000 THEN 9801
          PSET (300 + (Pz(i, 1) - cenX) * mmag / AU, 220 + (Pz(i, 2) - cenY) * mmag * 1 / AU), Pz(i, 0)
 9801     NEXT i
-         
+
          IF mmag < .1 THEN GOSUB 8000
          mmag = mmag / (1.5)
          mgT = TIMER
